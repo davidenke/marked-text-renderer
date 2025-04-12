@@ -1,13 +1,38 @@
 {
-    "private": true,
-    "scripts": {
-        "test": "node test.js"
-    },
-    "name": "marked-renderer-text-workspace",
-    "peerDependencies": {
-        "marked": "^15.0.8"
-    },
-    "devDependencies": {
-        "marked": "15.0.8"
-    }
+  "name": "@davidenke/marked-renderer-text",
+  "description": "A custom renderer for Marked to render markdown to plain text",
+  "version": "2.0.2",
+  "authors": [
+    "Edazpotato <edazpotato@gmail.com> (https://edaz.codes/)",
+    "David Enke <post@davidenke.de>"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:davidenke/marked-render-to-text.git"
+  },
+  "keywords": [
+    "marked",
+    "markdown",
+    "text",
+    "plain-text",
+    "renderer"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "test": "tsx --test --test-reporter=spec src/index.spec.ts"
+  },
+  "peerDependencies": {
+    "marked": "^15.0.8"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "22.0.1",
+    "@tsconfig/node-ts": "23.6.1",
+    "@types/node": "22.14.1",
+    "marked": "15.0.8",
+    "tsx": "4.19.3"
+  }
 }
