@@ -1,7 +1,7 @@
-# marked-renderer-text
+# marked-text-renderer
 
 [Github](https://github.com/davidenke/marked-render-to-text) |
-[NPM](https://www.npmjs.com/package/@davidenke/marked-renderer-text)
+[NPM](https://www.npmjs.com/package/marked-text-renderer)
 
 Forked from https://github.com/edazpotato/marked-render-to-text
 
@@ -13,7 +13,7 @@ formatting.
 ## Installation
 
 ```bash
-npm install -s @davidenke/marked-renderer-text
+npm install -s marked-text-renderer
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ By replacing the renderer entirely.
 
 ```ts
 import { marked } from 'marked';
-import { TextRenderer } from '@davidenke/marked-renderer-text';
+import { TextRenderer } from 'marked-text-renderer';
 
 const testText = `# Title\n**bold text**\n- A\n- List\n- *of*\n- ~~things~~`;
 const renderer = new TextRenderer();
@@ -48,7 +48,7 @@ By providing the renderer as an option to the marked function.
 
 ```ts
 import { marked } from 'marked';
-import { TextRenderer } from '@davidenke/marked-renderer-text';
+import { TextRenderer } from 'marked-text-renderer';
 
 const testText = `# Title\n**bold text**\n- A\n- List\n- *of*\n- ~~things~~`;
 const renderer = new TextRenderer();
@@ -61,7 +61,7 @@ You can enable fancy mode by passing `true` as the first argument when initialis
 
 ```ts
 import { marked } from 'marked';
-import { TextRenderer } from '@davidenke/marked-renderer-text';
+import { TextRenderer } from 'marked-text-renderer';
 
 const testText = `# Title\n**bold text**\n- A\n- List\n- *of*\n- ~~things~~`;
 const renderer = new TextRenderer(true);

@@ -1,5 +1,5 @@
 {
-  "name": "@davidenke/marked-renderer-text",
+  "name": "marked-text-renderer",
   "description": "A custom renderer for Marked to render markdown to plain text",
   "version": "2.0.2",
   "authors": [
