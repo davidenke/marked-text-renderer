@@ -6,6 +6,9 @@
     "Edazpotato <edazpotato@gmail.com> (https://edaz.codes/)",
     "David Enke <post@davidenke.de>"
   ],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
@@ -33,6 +36,7 @@
     "@tsconfig/node-ts": "23.6.1",
     "@types/node": "22.14.1",
     "marked": "15.0.8",
-    "tsx": "4.19.3"
+    "tsx": "4.19.3",
+    "typescript": "5.8.3"
   }
 }
