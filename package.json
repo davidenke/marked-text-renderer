@@ -1,7 +1,7 @@
 {
   "name": "@davidenke/marked-text-renderer",
   "description": "A custom renderer for Marked to render markdown to plain text",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "license": "MIT",
   "keywords": [
     "marked",
