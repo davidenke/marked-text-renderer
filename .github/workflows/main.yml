@@ -1,0 +1,90 @@
+name: test, build and release
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: v1-npm-deps-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: v1-npm-deps-
+      - run: npm ci
+      - run: npm test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: v1-npm-deps-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: v1-npm-deps-
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        if: success() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        with:
+          name: latest
+          path: dist
+
+  release:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org/
+      - uses: actions/download-artifact@v4
+        with:
+          name: latest
+          path: dist
+
+      - run: |
+          git config user.email "${{ vars.NPM_EMAIL }}"
+          git config user.name "${{ vars.NPM_USER }}"
+          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+
+      - run: |
+          npx --package release-it --package @release-it/conventional-changelog release-it \
+            --ci \
+            --npm.skipChecks \
+            --npm.publish \
+            --no-github.release \
+            --git.commitMessage='chore: release v${version}' \
+            --git.pushArgs=--follow-tags \
+            --plugins.@release-it/conventional-changelog.infile=CHANGELOG.md \
+            --plugins.@release-it/conventional-changelog.header='# marked-text-renderer' \
+            --plugins.@release-it/conventional-changelog.preset=angular
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - run: |
+          version=$(node -e "console.log(require('./package.json').version);")
+          echo "Released ${version} :rocket:" >> $GITHUB_STEP_SUMMARY
