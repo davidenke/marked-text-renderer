@@ -1,21 +1,8 @@
 {
-  "name": "marked-text-renderer",
+  "name": "@davidenke/marked-text-renderer",
   "description": "A custom renderer for Marked to render markdown to plain text",
   "version": "2.0.2",
-  "authors": [
-    "Edazpotato <edazpotato@gmail.com> (https://edaz.codes/)",
-    "David Enke <post@davidenke.de>"
-  ],
-  "files": [
-    "dist"
-  ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:davidenke/marked-render-to-text.git"
-  },
+  "license": "MIT",
   "keywords": [
     "marked",
     "markdown",
@@ -23,7 +10,25 @@
     "plain-text",
     "renderer"
   ],
-  "license": "MIT",
+  "authors": [
+    "David Enke <post@davidenke.de>",
+    "Edazpotato <edazpotato@gmail.com> (https://edaz.codes/)"
+  ],
+  "homepage": "https://github.com/davidenke/marked-text-renderer",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:davidenke/marked-text-renderer.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "test": "tsx --test --test-reporter=spec src/index.spec.ts"
